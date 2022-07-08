@@ -1,0 +1,14 @@
+{
+  "name": "nodepatriceyt",
+  "version": "1.0.0",
+  "description": "Aula do youtube para praticar nodeJS",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Jaum Vitor",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
