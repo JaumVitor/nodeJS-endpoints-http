@@ -1,6 +1,12 @@
 const express = require('express')
 const app = express()
 const UserModel = require('../models/user.model')
+// Fazendo public ser visivel para meu index
+app.use(express.static('src/public'))
+
+// Definindo meu render como ejs
+app.set('view engine', 'ejs')
+app.set('views', 'src/views')
 
 app.use(express.json())
 
@@ -10,8 +16,14 @@ app.use((req, res, next) => {
   console.log('Request Type: ' + req.method)
   console.log('Request Type: ' + req.headers['content-type'])
   console.log('Date' + new Date())
+  next()
+})
 
-  setTimeout(() => next(), 2000)
+app.get('/views/users', async (req, res) => {
+  // await para esperar carregar dados do banco, apos receber pode seguir o fluxo
+  const users = await UserModel.find({})
+  // Passando meu objeto users:users para o client (Preciso receber)
+  res.render('index', { users })
 })
 
 app.get('/users', async (req, res) => {
