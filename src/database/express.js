@@ -1,3 +1,4 @@
+const { render } = require('ejs')
 const express = require('express')
 const app = express()
 const UserModel = require('../models/user.model')
@@ -17,6 +18,11 @@ app.use((req, res, next) => {
   console.log('Request Type: ' + req.headers['content-type'])
   console.log('Date' + new Date())
   next()
+})
+
+app.get('/', async (req, res) => {
+  const users = await UserModel.find({})
+  res.render('index', { users })
 })
 
 app.get('/views/users', async (req, res) => {
